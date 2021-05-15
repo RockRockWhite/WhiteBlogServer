@@ -1,0 +1,55 @@
+﻿@page "/Blogs/{BlogId}"
+@using Markdig
+@using Markdig.Prism
+@using WhiteBlog.Models
+@using WhiteBlog.Services
+@inject BlogsService _blogsService
+
+@{
+    var blog = GetBlog();
+    var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().DisableHtml().UseBootstrap().UsePrism().Build();
+    string BodyText = Markdown.ToHtml(blog.Body.Replace("\\n", "\n"), pipeline);
+}
+
+<div class="masthead">
+    <div class="container">
+        <h1 class="display-4" style="color:#0c5460">@blog.Title</h1>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="card border-info mb-3" style="max-width: 50rem;border-color: #17a2b8">
+        <a class="card-header" style="color: #17a2b8">
+            @foreach (var tag in blog.Tags)
+            {
+                <span class="badge badge-success" style="background-color: #17a2b8">@tag  </span>
+            }
+        </a>
+
+
+        <div class="card-body text-info">
+            @(new MarkupString(BodyText))
+
+            <p class="card-text">
+                <small class="text-muted">Last Edited: @blog.LastEditedDate.ToLocalTime()</small>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string BlogId { get; set; }
+
+    Blog GetBlog()
+    {
+        var task = _blogsService.GetBlogById(BlogId);
+
+        return task.Result.resultBody;
+    }
+
+}

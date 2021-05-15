@@ -16,8 +16,9 @@
 
     @foreach (var blog in GetBlogs())
     {
+        string blogUrl = $"/Blogs/{blog.Id}";
         <div class="card border-info mb-3" style="max-width: 50rem;border-color: #17a2b8">
-            <a class="card-header" style="color: #17a2b8" href="#">
+            <a class="card-header" style="color: #17a2b8" href=@blogUrl>
                 @blog.Title
                 @foreach (var tag in blog.Tags)
                 {
@@ -27,14 +28,14 @@
             <div class="card-body text-info">
                 <p class="card-text">@blog.Body</p>
                 <p class="card-text">
-                    <small class="text-muted">@blog.LastEditedDate.ToLocalTime()</small>
+                    <small class="text-muted">Last Edited: @blog.LastEditedDate.ToLocalTime()</small>
                 </p>
             </div>
         </div>
     }
 
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation">
         @{
             string newPageUrl;
             newPageUrl = $"/Blogs/Pages/{int.Parse(Page) - 1}";
@@ -107,9 +108,5 @@
 
     public int BeginPage;
     public int EndPage;
-
-
-
-
 
 }

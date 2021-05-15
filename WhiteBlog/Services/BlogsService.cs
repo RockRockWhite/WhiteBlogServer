@@ -30,8 +30,6 @@ namespace WhiteBlog.Services
             var request =
                 new HttpRequestMessage(HttpMethod.Get,
                     $"https://rockrockwhite.cn:4333/api/Blogs?page={page}&limit={limit}");
-            request.Headers.Add("Accept", "application/vnd.github.v3+json");
-            request.Headers.Add("User-Agent", "HttpClientFactory-Sample");
 
             var client = _clientFactory.CreateClient();
 
@@ -49,6 +47,36 @@ namespace WhiteBlog.Services
                     }).ConfigureAwait(false);
 
                 return blogs;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public async Task<Response<Blog>> GetBlogById(string id)
+        {
+            var request =
+                new HttpRequestMessage(HttpMethod.Get,
+                    $"https://rockrockwhite.cn:4333/api/Blogs/{id}");
+
+            var client = _clientFactory.CreateClient();
+
+            var response = await client.SendAsync(request).ConfigureAwait(false);
+            ;
+
+            if (response.IsSuccessStatusCode)
+            {
+                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                ;
+                var blog = await JsonSerializer.DeserializeAsync
+                    <Response<Blog>>(responseStream, new JsonSerializerOptions()
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }).ConfigureAwait(false);
+
+                return blog;
             }
             else
             {

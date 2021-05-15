@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "Markdig/0.24.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Markdig.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Markdig.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -76,10 +85,44 @@
         "runtime": {
           "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
+      },
+      "WebStoating.Markdig.Prism/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Markdig": "0.22.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Markdig.Prism.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Markdig.Prism.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Markdig/0.24.0": {
+      "sha512": "xvoxO3Ck4mNflc+62d5LCI8xCVmj+SEdpGPptUZmPtbqK88iZkSxtprJWUadHNt8tXY6rFx8oHGpEw1Qcu3lAw==",
+      "type": "package",
+      "path": "markdig/0.24.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/Markdig.dll",
+        "lib/net452/Markdig.xml",
+        "lib/netcoreapp2.1/Markdig.dll",
+        "lib/netcoreapp2.1/Markdig.xml",
+        "lib/netcoreapp3.1/Markdig.dll",
+        "lib/netcoreapp3.1/Markdig.xml",
+        "lib/netstandard2.0/Markdig.dll",
+        "lib/netstandard2.0/Markdig.xml",
+        "lib/netstandard2.1/Markdig.dll",
+        "lib/netstandard2.1/Markdig.xml",
+        "markdig.0.24.0.nupkg.sha512",
+        "markdig.nuspec",
+        "markdig.png"
+      ]
+    },
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "sha512": "9ErxAAKaDzxXASB/b5uLEkLgUWv1QbeVxyJYEHQwMaxXOeFFVkQxiq8RyfVcifLU7NR0QY0p3acqx4ZpYfhHDg==",
       "type": "package",
@@ -216,11 +259,25 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "WebStoating.Markdig.Prism/1.0.0": {
+      "sha512": "Yyw4/fuqVEEIqjCGbRfowLAQ1pMZwuOU7s3FMg/J48LaJDW55pJfvBoKaeQTKSjQwWOFZonHu+VWSvd6RC0zVA==",
+      "type": "package",
+      "path": "webstoating.markdig.prism/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Markdig.Prism.dll",
+        "webstoating.markdig.prism.1.0.0.nupkg.sha512",
+        "webstoating.markdig.prism.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Microsoft.AspNetCore.WebUtilities >= 2.2.0"
+      "Markdig >= 0.24.0",
+      "Microsoft.AspNetCore.WebUtilities >= 2.2.0",
+      "WebStoating.Markdig.Prism >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -262,9 +319,17 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Markdig": {
+            "target": "Package",
+            "version": "[0.24.0, )"
+          },
           "Microsoft.AspNetCore.WebUtilities": {
             "target": "Package",
             "version": "[2.2.0, )"
+          },
+          "WebStoating.Markdig.Prism": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

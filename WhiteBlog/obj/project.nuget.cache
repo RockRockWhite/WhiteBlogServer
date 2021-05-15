@@ -1,16 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "VRHhSgnYw4Oh0H8Dm3TbcrqHf7c7mLJL0RR5AVhWxYa+IeXa+Du8L030oz0+UM+DVxHqlOeRs85kYepu/SlVTg==",
+  "dgSpecHash": "6hksI7G4WYb5wWEJC81jLOZPRqM3AnDwpQj/Fe0WGlnL3h6SPDp+mrx/91qMHcPq/WlHw4fN+dJQsjuPhnKpAg==",
   "success": true,
   "projectFilePath": "C:\\Users\\White\\source\\WhiteBlog\\WhiteBlog\\WhiteBlog.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\White\\.nuget\\packages\\markdig\\0.24.0\\markdig.0.24.0.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
     "C:\\Users\\White\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.1\\system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
-    "C:\\Users\\White\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
+    "C:\\Users\\White\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
+    "C:\\Users\\White\\.nuget\\packages\\webstoating.markdig.prism\\1.0.0\\webstoating.markdig.prism.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }
