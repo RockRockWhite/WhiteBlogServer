@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WhiteBlog.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
+using WhiteBlog.Services;
 
 
 namespace WhiteBlog
@@ -29,9 +29,12 @@ namespace WhiteBlog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+            services.AddSingleton<BlogsService>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {

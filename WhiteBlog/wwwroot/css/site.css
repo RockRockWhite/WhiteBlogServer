@@ -42,9 +42,20 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.a-page a {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.a-page a:hover {
+    background-color: #0c5460;
+    color: white;
+}
+

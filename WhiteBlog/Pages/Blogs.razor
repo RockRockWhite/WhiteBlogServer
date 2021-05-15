@@ -1,0 +1,115 @@
+﻿@page "/Blogs/Pages/{Page}"
+@using WhiteBlog.Services
+@using WhiteBlog.Models
+@using WhiteBlog.Models
+@using System.Runtime.InteropServices
+@inject BlogsService _blogsService
+
+<div class="masthead">
+    <div class="container">
+        <h1 class="display-4" style="color:#0c5460">博文列表</h1>
+    </div>
+</div>
+
+<div class="container">
+
+
+    @foreach (var blog in GetBlogs())
+    {
+        <div class="card border-info mb-3" style="max-width: 50rem;border-color: #17a2b8">
+            <a class="card-header" style="color: #17a2b8" href="#">
+                @blog.Title
+                @foreach (var tag in blog.Tags)
+                {
+                    <span class="badge badge-success" style="background-color: #17a2b8">@tag</span>
+                }
+            </a>
+            <div class="card-body text-info">
+                <p class="card-text">@blog.Body</p>
+                <p class="card-text">
+                    <small class="text-muted">@blog.LastEditedDate.ToLocalTime()</small>
+                </p>
+            </div>
+        </div>
+    }
+
+
+    <nav aria-label="Page navigation example">
+        @{
+            string newPageUrl;
+            newPageUrl = $"/Blogs/Pages/{int.Parse(Page) - 1}";
+            if (int.Parse(Page) == 1)
+            {
+                newPageUrl = $"/Blogs/Pages/1";
+            }
+        }
+        <ul class="pagination">
+            <li class="page-item a-page">
+                <a class="page-link" href=@newPageUrl>Previous</a>
+            </li>
+
+            @if (int.Parse(Page) <= 5)
+            {
+                BeginPage = 1;
+                EndPage = 5;
+            }
+            else
+            {
+                BeginPage = int.Parse(Page) - 2;
+                EndPage = int.Parse(Page) + 2;
+            }
+
+            @for (int i = BeginPage; i <= EndPage; i++)
+            {
+                newPageUrl = $"/Blogs/Pages/{i}";
+
+                <li class="page-item a-page">
+                    @if (i == int.Parse(Page))
+                    {
+                        <a class="page-link" style="background-color: #0c5460" href=@newPageUrl>
+                            @i.ToString()
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="page-link" href=@newPageUrl>
+                            @i.ToString()
+                        </a>
+                    }
+
+                </li>
+            }
+            @{
+                newPageUrl = $"/Blogs/Pages/{int.Parse(Page) + 1}";
+            }
+
+            <li class="page-item a-page">
+                <a class="page-link" href=@newPageUrl>Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+@code {
+
+    List<Blog> GetBlogs()
+    {
+        var task = _blogsService.GetBlogsByPage(int.Parse(Page), 20);
+
+        return task.Result.resultBody;
+    }
+
+
+    [Parameter]
+    public
+        string Page { get; set; }
+
+    public int BeginPage;
+    public int EndPage;
+
+
+
+
+
+}
