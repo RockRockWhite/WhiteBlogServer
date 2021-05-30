@@ -1,0 +1,56 @@
+﻿@page "/BlogEditor"
+@using Markdig
+@using Markdig.Prism
+@inject IJSRuntime _js
+
+<div class="container-fluid">
+
+
+    <form>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="请输入文章标题" style="color: #17a2b8">
+            <div class="input-group-append">
+                <button class="btn btn-info" style="background-color: #17a2b8;color: white;">上传</button>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="background-color: #17a2b8;color: white;">文章标签</span>
+            </div>
+            <input type="text" class="form-control" placeholder="请输入文章标签" style="color: #17a2b8">
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="markdownInputTextarea" style="color: #0c5460">Markdown</label>
+                <textarea  class="form-control" id="markdownInputTextarea" rows="20" style="color: #0c5460" @onchange="RenderMarkdown"></textarea>
+            </div>
+            <div class="col">
+                <label for="markdownRenderTextarea" style="color: #0c5460">Markdown渲染</label>
+                @(new MarkupString(RenderText))
+
+            </div >
+        </div >
+    </form >
+
+</div >
+
+@code {
+    private string RenderText;
+
+    private void RenderMarkdown(ChangeEventArgs e)
+    {
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().DisableHtml().UseBootstrap().UsePrism().Build();
+        string BodyText = Markdown.ToHtml(e.Value.ToString().Replace("```", " \n```"), pipeline);
+        RenderText = BodyText;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _js.InvokeAsync<string>("prism");
+    }
+
+
+}

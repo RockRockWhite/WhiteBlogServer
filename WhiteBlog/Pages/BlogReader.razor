@@ -4,12 +4,14 @@
 @using WhiteBlog.Models
 @using WhiteBlog.Services
 @inject BlogsService _blogsService
+@inject IJSRuntime _js
 
 @{
     var blog = GetBlog();
     var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().DisableHtml().UseBootstrap().UsePrism().Build();
     string BodyText = Markdown.ToHtml(blog.Body.Replace("\\n", "\n"), pipeline);
 }
+
 
 <div class="masthead">
     <div class="container">
@@ -24,7 +26,7 @@
         <a class="card-header" style="color: #17a2b8">
             @foreach (var tag in blog.Tags)
             {
-                <span class="badge badge-success" style="background-color: #17a2b8">@tag  </span>
+                <span class="badge badge-success" style="background-color: #17a2b8">@tag </span>
             }
         </a>
 
@@ -51,5 +53,16 @@
 
         return task.Result.resultBody;
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _js.InvokeAsync<string>("prism");
+        }
+    }
+
+
+
 
 }
