@@ -34,12 +34,12 @@ namespace WhiteBlog.Services
             var client = _clientFactory.CreateClient();
 
             var response = await client.SendAsync(request).ConfigureAwait(false);
-            ;
+            
 
             if (response.IsSuccessStatusCode)
             {
                 using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                ;
+
                 var blogs = await JsonSerializer.DeserializeAsync
                     <Response<List<Blog>>>(responseStream, new JsonSerializerOptions()
                     {
@@ -63,13 +63,13 @@ namespace WhiteBlog.Services
 
             var client = _clientFactory.CreateClient();
 
-            var response = await client.SendAsync(request);
-            
+            var response = await client.SendAsync(request).ConfigureAwait(false);
+
 
             if (response.IsSuccessStatusCode)
             {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-                ;
+                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
                 var blog = await JsonSerializer.DeserializeAsync
                     <Response<Blog>>(responseStream, new JsonSerializerOptions()
                     {
